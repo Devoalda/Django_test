@@ -1,12 +1,7 @@
-FROM python:3.11.5-alpine
-#FROM python:3.8.5-alpine
-
-COPY . /app
-WORKDIR /app
-
-RUN apk add --no-cache mariadb-connector-c-dev
-RUN apk update && apk add python3 python3-dev mariadb-dev build-base && pip3 install mysqlclient && apk del python3-dev mariadb-dev build-base
-
-RUN apk add netcat-openbsd
-
-RUN pip install -r requirements.txt
+FROM python:3.6
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /my_app_dir
+WORKDIR /my_app_dir
+ADD requirements.txt /my_app_dir/
+RUN pip install - upgrade pip && pip install -r requirements.txt
+ADD . /my_app_dir/
