@@ -1,18 +1,12 @@
-FROM python:3.10
+FROM python:3.11.5-alpine
+#FROM python:3.8.5-alpine
 
-EXPOSE 8000
+COPY . /app
+WORKDIR /app
 
-ENV PYTHONUNBUFFERED 1
+RUN apk add --no-cache mariadb-connector-c-dev
+RUN apk update && apk add python3 python3-dev mariadb-dev build-base && pip3 install mysqlclient && apk del python3-dev mariadb-dev build-base
 
-RUN mkdir /requirements
-WORKDIR /requirements
-COPY requirements.txt /requirements/
-RUN pip install -r requirements.txt --no-cache-dir
+RUN apk add netcat-openbsd
 
-RUN mkdir /code
-WORKDIR /code
-COPY . /code/
-
-# Run the application:
-CMD ["python", "manage.py", "migrate"]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+RUN pip install -r requirements.txt

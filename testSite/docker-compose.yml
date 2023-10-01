@@ -16,12 +16,13 @@ services:
     build:
         context: .
         dockerfile: Dockerfile
+    entrypoint: ["./wait.sh"]
     ports:
       - "8000:8000"  # Map container port 8000 to host port 8000
     environment:
       - DEBUG=True
       - SECRET_KEY=random-secret-key
-      - DATABASE_URL=mysql://mariadb:mariadb@localhost:3305/mariadb
+      - DATABASE_URL=mysql://mariadb:mariadb@localhost:3306/mariadb
     depends_on:
       - db
     restart: on-failure
