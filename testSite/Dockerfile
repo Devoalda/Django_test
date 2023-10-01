@@ -9,3 +9,4 @@ RUN pip install -r requirements.txt
 
 RUN mkdir /code
 WORKDIR /code
+COPY . /code/
