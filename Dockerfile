@@ -17,9 +17,3 @@ RUN pip install -r requirements.txt
 
 # Copy the Django project files into the container
 COPY . .
-
-# Expose port 8000 (change as needed)
-EXPOSE 8000
-
-# Start the Django application
-CMD ["python", "testSite/manage.py", "runserver", "0.0.0.0:8000"]
