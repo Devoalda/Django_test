@@ -1,18 +1,6 @@
 version: '3'
 
 services:
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - "8000:8000"  # Map container port 8000 to host port 8000
-    environment:
-      - DEBUG=True
-      - SECRET_KEY=random-secret-key
-      - DATABASE_URL=mysql://mariadb:mariadb@localhost:3306/mariadb
-    depends_on:
-      - db
-
   db:
     image: mysql
     environment:
@@ -24,3 +12,16 @@ services:
       - ./mariadb:/var/lib/mysql
     ports:
       - "3306:3306"
+  web:
+    build: .
+    command: python manage.py runserver -1.0.0.0:8000
+    ports:
+      - "7999:8000"  # Map container port 8000 to host port 8000
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=random-secret-key
+      - DATABASE_URL=mysql://mariadb:mariadb@localhost:3305/mariadb
+    depends_on:
+      - db
+    restart: always
+
