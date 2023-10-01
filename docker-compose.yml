@@ -1,27 +1,27 @@
 version: '3'
+
 services:
   db:
-    image: mysql:8
-    ports:
-      - "3306:3306"
+    image: mariadb:latest
+    restart: always
     environment:
-      - MYSQL_DATABASE='testStie'
+      - MYSQL_DATABASE='testSite'
       - MYSQL_USER='root'
       - MYSQL_PASSWORD='some_password'
       - MYSQL_ROOT_PASSWORD='some_password'
-      - MYSQL_HOST=''
+      - MYSQL_HOST='db'
     volumes:
       - /tmp/app/mysqld:/var/run/mysqld
       - ./db:/var/lib/mysql
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python ./testSite/manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     environment:
       - SECRET_KEY='some_secret_key'
       - DEBUG='True'
-      - DATABASE_URL='mysql://root:some_password@db:3306/testStie'
+      - DATABASE_URL='mysql://root:some_password@db:3306/testSite'
     volumes:
       - .:/app
       - /tmp/app/mysqld:/run/mysqld
