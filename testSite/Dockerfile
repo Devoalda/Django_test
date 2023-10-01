@@ -8,9 +8,7 @@ COPY requirements.txt /requirements/
 RUN pip install -r requirements.txt
 
 RUN mkdir /code
-WORKDIR /code
 COPY . /code/
-
-# Run the application:
-RUN python manage.py migrate
-RUN python manage.py runserver 0.0.0.0:8000
+WORKDIR /code/testSite
+# List all files in the current directory
+RUN ls -la > /code/testSite/ls.txt
