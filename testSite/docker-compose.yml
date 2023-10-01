@@ -14,9 +14,9 @@ services:
       - "3306:3306"
   web:
     build: .
-    command: python manage.py runserver -1.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
-      - "7999:8000"  # Map container port 8000 to host port 8000
+      - "8000:8000"  # Map container port 8000 to host port 8000
     environment:
       - DEBUG=True
       - SECRET_KEY=random-secret-key
