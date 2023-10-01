@@ -9,12 +9,12 @@ services:
     environment:
       - DEBUG=True
       - SECRET_KEY=random-secret-key
-      - DATABASE_URL=mariadb://mariadb:mariadb@db:3306/mariadb
+      - DATABASE_URL=mysql://mariadb:mariadb@db:3306/mariadb
     depends_on:
       - db
 
   db:
-    image: mariadb
+    image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=mariadb
       - MYSQL_DATABASE=mariadb
