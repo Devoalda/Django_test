@@ -13,8 +13,9 @@ services:
     ports:
       - "3306:3306"
   web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    build:
+        context: .
+        dockerfile: Dockerfile
     ports:
       - "8000:8000"  # Map container port 8000 to host port 8000
     environment:
