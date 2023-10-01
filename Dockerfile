@@ -9,6 +9,6 @@ RUN pip install -r requirements.txt
 
 RUN mkdir /code
 COPY . /code/
-WORKDIR /code
+WORKDIR /code/testSite
 # List all files in the current directory
 RUN ls -la

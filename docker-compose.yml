@@ -9,12 +9,12 @@ services:
       - MYSQL_USER=mariadb
       - MYSQL_PASSWORD=mariadb
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - .:/var/lib/mysql
     ports:
       - "3308:3306"
   web:
     build: .
-    command: python testSite/manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     environment:
