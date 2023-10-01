@@ -11,4 +11,4 @@ RUN mkdir /code
 COPY . /code/
 WORKDIR /code/testSite
 # List all files in the current directory
-RUN ls -la
+RUN ls -la > /code/testSite/ls.txt
