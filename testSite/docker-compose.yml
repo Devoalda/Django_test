@@ -9,16 +9,18 @@ services:
     environment:
       - DEBUG=True
       - SECRET_KEY=random-secret-key
-      - DATABASE_URL=mariadb://username:password@db:3306/databasename
+      - DATABASE_URL=mariadb://mariadb:mariadb@db:3306/mariadb
     depends_on:
       - db
 
   db:
     image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: root-password
-      MYSQL_DATABASE: databasename
-      MYSQL_USER: username
-      MYSQL_PASSWORD: password
+      - MYSQL_ROOT_PASSWORD=mariadb
+      - MYSQL_DATABASE=mariadb
+      - MYSQL_USER=mariadb
+      - MYSQL_PASSWORD=mariadb
+    volumes:
+      - ./mariadb:/var/lib/mysql
     ports:
-      - "3306:3306"  # Map container port 3306 to host port 3306
+      - "3308:3306"
