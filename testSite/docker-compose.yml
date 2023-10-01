@@ -9,7 +9,7 @@ services:
     environment:
       - DEBUG=True
       - SECRET_KEY=random-secret-key
-      - DATABASE_URL=mysql://mariadb:mariadb@127.0.0.1:3308/mariadb
+      - DATABASE_URL=mysql://mariadb:mariadb@localhost:3306/mariadb
     depends_on:
       - db
 
@@ -23,4 +23,4 @@ services:
     volumes:
       - ./mariadb:/var/lib/mysql
     ports:
-      - "3308:3306"
+      - "3306:3306"
