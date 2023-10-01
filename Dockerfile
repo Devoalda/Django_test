@@ -1,14 +1,25 @@
-FROM python:3.10
+# Use the official Python image as the base image
+FROM python:3.9-slim
 
-ENV PYTHONUNBUFFERED 1
+# Set environment variables for Django (Hardcoded)
+ENV DEBUG=True
+ENV SECRET_KEY=your-secret-key
+ENV DATABASE_URL=mysql://intellij:username:password@localhost:3306/databasename
 
-RUN mkdir /requirements
-WORKDIR /requirements
-COPY requirements.txt /requirements/
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements.txt file into the container
+COPY requirements.txt .
+
+# Install dependencies
 RUN pip install -r requirements.txt
 
-RUN mkdir /code
-COPY . /code/
-WORKDIR /code/testSite
-# List all files in the current directory
-RUN ls -la > /code/testSite/ls.txt
+# Copy the Django project files into the container
+COPY . .
+
+# Expose port 8000 (change as needed)
+EXPOSE 8000
+
+# Start the Django application
+CMD ["python", "testSite/manage.py", "runserver", "0.0.0.0:8000"]

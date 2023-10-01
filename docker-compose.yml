@@ -1,28 +1,25 @@
 version: '3'
 
 services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"  # Map container port 8000 to host port 8000
+    environment:
+      - DEBUG=${DEBUG}
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - db
+
   db:
     image: mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=mariadb
-      - MYSQL_DATABASE=mariadb
-      - MYSQL_USER=mariadb
-      - MYSQL_PASSWORD=mariadb
-    volumes:
-      - .:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: root-password
+      MYSQL_DATABASE: databasename
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
     ports:
-      - "3308:3306"
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - "8000:8000"
-    environment:
-      - SECRET_KEY=some_secret_key
-      - DEBUG='True'
-      - DATABASE_URL='mysql://mariadb:mariadb@mariadb:3306/mariadb'
-    volumes:
-      - .:/app
-      - /tmp/app/mysqld:/run/mysqld
-    depends_on:
-      - db
+      - "3306:3306"  # Map container port 3306 to host port 3306
