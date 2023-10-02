@@ -11,7 +11,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /code/
 
 # Migrate
-CMD ["python", "manage.py", "migrate"]
+COPY ./entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r//' /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+RUN chown app /entrypoint.sh
 
 # Run server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
