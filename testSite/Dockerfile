@@ -16,7 +16,7 @@ COPY . /code/
 # RUN chmod a+x /entrypoint.sh
 # RUN chown root:root /entrypoint.sh
 
-RUN python manage.py migrate
+# RUN python manage.py migrate
 
 # Run server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
