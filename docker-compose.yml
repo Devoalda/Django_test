@@ -16,6 +16,7 @@ services:
       - MYSQL_PASSWORD=password
     expose:
       - 3306
+
   web:
     build:
       context: testSite
