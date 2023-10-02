@@ -18,5 +18,22 @@ spec:
       - name: testsite
         image: localhost:5000/testsite
         imagePullPolicy: IfNotPresent
+        env:
+          - name: DEBUG
+            value: "True"
+          - name: SECRET_KEY
+            value: A_RANDOM_SECRET_KEY
+          - name: DB_NAME
+            value: testsite
+          - name: DB_USER
+            value: user
+          - name: DB_PASSWORD
+            value: password
+          - name: DB_HOST
+            value: db
+          - name: DB_PORT
+            value: "3306"
+          - name: ALLOWED_HOSTS
+            value: "*"
         ports:
         - containerPort: 8000
