@@ -13,10 +13,15 @@ cp env .env # Edit the .env file
 ```
 
 ## Docker 
+
 ```
 docker compose build
 docker compose up -d
-docker compose run web python manage.py migrate # Migrations
+```
+
+In another terminal
+```bash
+python manage.py migrate
 ```
 
 ## Run
