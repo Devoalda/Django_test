@@ -1,8 +1,9 @@
 version: '3'
 
 services:
-  db:
-    image: mysql
+  mariadb:
+    image: bitnami/mariadb-galera:latest
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=mariadb
       - MYSQL_DATABASE=mariadb
@@ -10,8 +11,10 @@ services:
       - MYSQL_PASSWORD=mariadb
     volumes:
       - ./mariadb:/var/lib/mysql
-    ports:
-      - "3306:3306"
+    networks:
+        - webnet
+#    ports:
+#      - "3306:3306"
   web:
     build:
         context: .
@@ -21,8 +24,12 @@ services:
     environment:
       - DEBUG=True
       - SECRET_KEY=random-secret-key
-      - DATABASE_URL=mysql://mariadb:mariadb@localhost:3305/mariadb
+      - DATABASE_URL=mysql://mariadb:mariadb@mariadb:3306/mariadb
     depends_on:
-      - db
-    restart: always
+      - mariadb
+    networks:
+      - webnet
 
+
+networks:
+    webnet:
