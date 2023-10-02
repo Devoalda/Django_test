@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: testsite
-        image: localhost:5000/testsite
+        image: amusement3004/testsite
         imagePullPolicy: IfNotPresent
         env:
           - name: DEBUG

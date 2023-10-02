@@ -24,6 +24,24 @@ In another terminal
 python manage.py migrate
 ```
 
+## Kubernetes
+Install [Minikube](https://minikube.sigs.k8s.io/docs/start/), [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) and start minikube
+
+```bash
+minikube start
+```
+
+```bash
+cd k8s
+kubectl apply -f .
+```
+
+### Migration
+
+```bash
+kubectl exec -it <pod-name> -- python manage.py migrate
+```
+
 ## Run
 
 ```bash
