@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testSite
+  labels:
+    app: testSite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testSite
+  template:
+    metadata:
+      labels:
+        app: testSite
+    spec:
+      containers:
+      - name: testSite
+        dockerfile: Dockerfile
+        ports:
+        - containerPort: 8000

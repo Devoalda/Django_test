@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    app: testSite
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: testSite
+    tier: mariadb
+  clusterIP: None
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mariadb-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-pv-claim
+  labels:
+    app: testSite
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testSite-mariadb
+  labels:
+    app: testSite
+spec:
+  selector:
+    matchLabels:
+      app: testSite
+      tier: mariadb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: testSite
+        tier: mariadb
+    spec:
+      containers:
+      - image: mariadb:10.5
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: testSite
+        - name: MYSQL_USER
+          value: user
+        - name: MYSQL_PASSWORD
+          value: password
+        ports:
+        - containerPort: 3306
+          name: mariadb
+        volumeMounts:
+        - name: mariadb-persistent-storage
+          mountPath: /var/lib/mariadb
+      volumes:
+      - name: mariadb-persistent-storage
+        persistentVolumeClaim:
+          claimName: mariadb-pv-claim
