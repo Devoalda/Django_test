@@ -12,8 +12,8 @@ COPY . /code/
 
 # Migrate
 RUN sed -i 's/\r//' /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-RUN chown root:root /entrypoint.sh
+RUN chmod a+x /entrypoint.sh
+# RUN chown root:root /entrypoint.sh
 
 # Run server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
