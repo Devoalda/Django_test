@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.5
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - dbnet
+    environment:
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_ROOT_PASSWORD=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+    expose:
+      - 3306
+  web:
+    build:
+      context: testSite
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"  # Map container port 8000 to host port 8000
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=random-secret-key
+      - DB_NAME=mariadb
+      - DB_USER=mariadb
+      - DB_PASSWORD=mariadb
+      - DB_HOST=localhost
+      - DB_PORT=3306
+    depends_on:
+      - mariadb
+    networks:
+      - dbnet
+
+volumes:
+    db_data:
+
+networks:
+  dbnet:
