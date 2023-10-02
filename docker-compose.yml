@@ -33,6 +33,7 @@ services:
       - DB_PASSWORD=password
       - DB_HOST=db
       - DB_PORT=3306
+      - ALLOWED_HOSTS=*
     depends_on:
       - db
     networks:
