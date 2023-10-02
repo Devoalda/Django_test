@@ -84,7 +84,17 @@ WSGI_APPLICATION = 'testSite.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env.str('DB_NAME', 'testSite'),
+        'USER': env.str('DB_USER', 'mariadb'),
+        'PASSWORD': env.str('DB_PASSWORD', 'mariadb'),
+        'HOST': env.str('DB_HOST', 'localhost'),
+        'PORT': env.str('DB_PORT', '3306'),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
+        },
+    }
 }
 
 # CACHES = {

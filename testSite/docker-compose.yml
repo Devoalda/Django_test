@@ -16,15 +16,17 @@ services:
 #    ports:
 #      - "3306:3306"
   web:
-    build:
-        context: .
-        dockerfile: Dockerfile
+    build: .
     ports:
       - "8000:8000"  # Map container port 8000 to host port 8000
     environment:
       - DEBUG=True
       - SECRET_KEY=random-secret-key
-      - DATABASE_URL=mysql://mariadb:mariadb@mariadb:3306/mariadb
+      - DB_NAME=mariadb
+      - DB_USER=mariadb
+      - DB_PASSWORD=mariadb
+      - DB_HOST=mariadb
+      - DB_PORT=3306
     depends_on:
       - mariadb
     networks:
