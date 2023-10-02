@@ -10,10 +10,10 @@ services:
     networks:
       - dbnet
     environment:
-      - MYSQL_DATABASE=mariadb
-      - MYSQL_USER=mariadb
-      - MYSQL_ROOT_PASSWORD=mariadb
-      - MYSQL_PASSWORD=mariadb
+      - MYSQL_DATABASE=testSite
+      - MYSQL_USER=user
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_PASSWORD=password
     expose:
       - 3306
   web:
@@ -27,9 +27,9 @@ services:
     environment:
       - DEBUG=True
       - SECRET_KEY=random-secret-key
-      - DB_NAME=mariadb
-      - DB_USER=mariadb
-      - DB_PASSWORD=mariadb
+      - DB_NAME=testSite
+      - DB_USER=user
+      - DB_PASSWORD=password
       - DB_HOST=db
       - DB_PORT=3306
     depends_on:
