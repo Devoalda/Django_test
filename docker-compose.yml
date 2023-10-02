@@ -38,6 +38,16 @@ services:
     networks:
       - dbnet
 
+  web_migrations:
+    build:
+      context: testSite
+      dockerfile: Dockerfile
+    command: python manage.py migrate
+    depends_on:
+      - db
+    networks:
+      - dbnet
+
 volumes:
     db_data:
 
