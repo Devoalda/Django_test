@@ -10,10 +10,10 @@ services:
     networks:
       - dbnet
     environment:
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_ROOT_PASSWORD=nextcloud
-      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=mariadb
+      - MYSQL_USER=mariadb
+      - MYSQL_ROOT_PASSWORD=mariadb
+      - MYSQL_PASSWORD=mariadb
     expose:
       - 3306
   web:
@@ -30,7 +30,7 @@ services:
       - DB_NAME=mariadb
       - DB_USER=mariadb
       - DB_PASSWORD=mariadb
-      - DB_HOST=localhost
+      - DB_HOST=db
       - DB_PORT=3306
     depends_on:
       - db
