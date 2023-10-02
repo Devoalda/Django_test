@@ -20,14 +20,13 @@ services:
     build:
       context: testSite
       dockerfile: Dockerfile
-    command: ./entrypoint.sh
     restart:
         always
     ports:
       - "8000:8000"  # Map container port 8000 to host port 8000
     environment:
       - DEBUG=True
-      - SECRET_KEY=random-secret-key
+      - SECRET_KEY=A_RANDOM_SECRET_KEY
       - DB_NAME=testSite
       - DB_USER=user
       - DB_PASSWORD=password
