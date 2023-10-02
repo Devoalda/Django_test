@@ -5,10 +5,10 @@ services:
     image: bitnami/mariadb-galera:latest
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=mariadb
-      - MYSQL_DATABASE=mariadb
-      - MYSQL_USER=mariadb
-      - MYSQL_PASSWORD=mariadb
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_DATABASE=mariadb
+      - MARIADB_USER=mariadb
+      - MARIADB_PASSWORD=mariadb
     volumes:
       - ./mariadb:/var/lib/mysql
     networks:
