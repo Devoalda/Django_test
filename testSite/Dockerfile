@@ -9,6 +9,11 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /code/
+
+# Migrate
+CMD ["python", "manage.py", "migrate"]
+
+# Run server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
