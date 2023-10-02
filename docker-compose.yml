@@ -20,6 +20,8 @@ services:
     build:
       context: testSite
       dockerfile: Dockerfile
+    restart:
+        always
     ports:
       - "8000:8000"  # Map container port 8000 to host port 8000
     environment:
