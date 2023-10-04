@@ -1,5 +1,10 @@
 FROM python:3.10
 
+# Install Netcat
+RUN apt-get update && \
+    apt-get -y install netcat && \
+    apt-get clean
+
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
