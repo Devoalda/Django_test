@@ -38,18 +38,6 @@ services:
       - db
     networks:
       - dbnet
-
-  web_migrations:
-    build:
-      context: testSite
-    restart: on-failure
-    command: python manage.py migrate
-    depends_on:
-      - db
-      - web
-    networks:
-      - dbnet
-
 volumes:
     db_data:
 

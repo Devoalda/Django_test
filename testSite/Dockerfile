@@ -12,6 +12,9 @@ COPY . /code/
 
 # RUN chmod +x start.sh
 # CMD ["./start.sh"]
-
+ENTRYPOINT ["python", "manage.py"]
+CMD ["makemigrations"]
+CMD ["migrate"]
+CMD ["runserver", "0.0.0.0:8000"]
 # Run server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
