@@ -42,10 +42,10 @@ services:
   web_migrations:
     build:
       context: testSite
-      dockerfile: Dockerfile
     command: python manage.py migrate
     depends_on:
       - db
+      - web
     networks:
       - dbnet
 
