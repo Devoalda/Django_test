@@ -46,7 +46,7 @@ services:
       - DB_PORT=3306
       - ALLOWED_HOSTS=*
       - CACHE=True
-      - REDIS_URL=redis://redis:6379/1
+      - REDIS_URL=redis://:password@redis:6379/0
     depends_on:
       - db
       - redis
