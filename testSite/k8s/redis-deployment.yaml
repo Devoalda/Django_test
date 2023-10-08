@@ -63,7 +63,8 @@ spec:
       containers:
       - image: redis:latest
         name: mysql
-        command: redis-server --requirepass password
+        command: ["redis-server"]
+        args: ["--requirepass", "password"]
         ports:
         - containerPort: 6379
           name: redis
